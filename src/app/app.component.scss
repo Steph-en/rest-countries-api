@@ -2,12 +2,14 @@
     --head: #FFFFFF;
     --font: #111517;
     --card-bg: #FFFFFF;
+    --bg-main: #F2F2F2;
 }
 
 .dark {
     --head: #2B3844;
     --font: #FFFFFF;
     --card-bg: #2B3844;
+    --bg-main: #202C36;
 }
 
 main{
@@ -23,7 +25,7 @@ main{
         align-items: center;
         justify-content: center;
         justify-content: space-between;
-        box-shadow: 0 0 10px .1px #979797;
+        box-shadow: 0 0 5px .1px #333a42;
         background-color: var(--head);
 
         p{
