@@ -1,12 +1,44 @@
+:root {
+    --head: #FFFFFF;
+    --font: #111517;
+    --card-bg: #FFFFFF;
+}
+
+.dark {
+    --head: #2B3844;
+    --font: #FFFFFF;
+    --card-bg: #2B3844;
+}
+
 main{
     width: 100%;
-    height: auto;
+    height: 100vh;
 
     .head{
+        color: var(--font);
+        width: auto;
+        height: 10%;
         padding: 0 4%;
         display: flex;
         align-items: center;
         justify-content: center;
         justify-content: space-between;
+        box-shadow: 0 0 10px .1px #979797;
+        background-color: var(--head);
+
+        p{
+            gap: 10px;
+            display: flex;
+            align-items: center;
+
+            img{
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        p:hover{
+            cursor: pointer;   
+        }
     }
 }

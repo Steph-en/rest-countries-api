@@ -1,7 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --bg-main: #F2F2F2;
+}
+
+.dark {
+    --bg-main: #202C36;
+}
 
 body{
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
-    /* background-color: ; */
+    background-color: var(--bg-main);
 }
