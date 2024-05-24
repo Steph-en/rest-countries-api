@@ -12,4 +12,14 @@ import { faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 export class HomeComponent {
   search = faSearch;
   arrow = faChevronDown;
+
+  toggle() {
+    const dropBtn = document.querySelector(".filter-button") as HTMLElement;
+    const dropDown = document.querySelector(".drop-down") as HTMLElement;
+
+    if (dropBtn && dropDown) {
+      dropDown.style.display = dropDown.style.display === 'block' ? 'none' : 'block';
+
+    }
+  }
 }
