@@ -1,5 +1,10 @@
-<div class="search-box">
-    <input type="text" placeholder="Search for a country…">
+<div class="search">
+    <p class="search-box">
+        <fa-icon class="search-icon" [icon] = "search"></fa-icon>
+        <input class="input" type="text" placeholder="Search for a country…">
+    </p>
 
-    <button>Filter by Region</button>
+    <button class="filter-button">Filter by Region
+        <fa-icon class="arrow-icon" [icon] = "arrow"></fa-icon>
+    </button>
 </div>
