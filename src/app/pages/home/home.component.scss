@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
     .search-box {
         gap: 28px;
         width: 28%;
@@ -16,7 +16,7 @@
         align-items: center;
         box-shadow: 0 2px 10px .1px var(--shadow);
 
-        .search-icon{
+        .search-icon {
             font-size: 16px;
             color: var(--icon);
         }
@@ -34,17 +34,18 @@
             outline: 0;
         }
 
-        .input::placeholder{
+        .input::placeholder {
             color: var(--icon);
         }
     }
 
     .filter-button {
-        border: 0;
         border-radius: 5px;
+        border: 0;
         width: 15%;
         height: 50px;
         padding: 0 1%;
+        font-size: 16px;
         color: var(--font);
         background-color: var(--card-bg);
         display: flex;
@@ -54,7 +55,34 @@
         box-shadow: 0 2px 10px .1px var(--shadow);
     }
 
-    .filter-button:hover{
+    .filter-button:hover {
         cursor: pointer;
+    }
+
+    .drop-down {
+        position: fixed;
+        top: 28%;
+        right: 4%;
+        width: 11.8%;
+        height: auto;
+        padding: .5% 1%;
+        border-radius: 5px;
+        background-color: var(--card-bg);
+        box-shadow: 0 2px 10px .1px var(--shadow);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        li {
+            width: 100%;
+            padding: 10px;
+            color: var(--font);
+            list-style: none;
+            font-size: 16px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
     }
 }
