@@ -1,0 +1,19 @@
+.cards{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.country-card{
+    height: 60%;
+    width: 20%;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    color: var(--font);
+    background-color: var(--card-bg);
+
+    .info{
+        padding: 0 6%;
+    }
+}
