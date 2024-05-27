@@ -17,12 +17,10 @@ export class HomeComponent {
   arrow = faChevronDown;
 
   toggle() {
-    const dropBtn = document.querySelector(".filter-button") as HTMLElement;
     const dropDown = document.querySelector(".drop-down") as HTMLElement;
 
-    if (dropBtn && dropDown) {
+    if (dropDown) {
       dropDown.style.display = dropDown.style.display === 'block' ? 'none' : 'block';
-
     }
   }
 }
