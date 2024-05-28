@@ -11,5 +11,5 @@ import { Interface } from '../interface/interface';
   styleUrl: './country.component.scss'
 })
 export class CountryComponent {
-  @Input() interface!:Interface;
+  @Input() interfaceForm!: Interface;
 }
