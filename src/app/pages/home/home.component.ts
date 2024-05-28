@@ -6,7 +6,6 @@ import { Interface } from '../../interface/interface';
 import { RouterOutlet } from '@angular/router';
 import { ServiceService } from '../../services/service.service';
 import { CommonModule } from '@angular/common';
-import { Observable, Subject, take } from 'rxjs';
 
 @Component({
     selector: 'app-home',
@@ -19,6 +18,7 @@ export class HomeComponent implements OnInit {
   search = faSearch;
   arrow = faChevronDown;
 
+  interfaceForm: Interface[] = [];
   interfaceList: Interface[] = [];
 
   constructor(private appService: ServiceService) {}
@@ -33,8 +33,19 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.appService.getAllCountryData().subscribe((interfaceForm: Interface[]) => {
+      this.interfaceForm = interfaceForm;
       this.interfaceList = interfaceForm;
     });
   }
 
+  filterResults(text: string) {
+    if (!text) {
+      this.interfaceList = this.interfaceForm;
+    } else {
+      this.interfaceList = this.interfaceForm.filter((item: Interface) =>
+        item.name.official.toLowerCase().includes(text.toLowerCase())
+      );
+    }
+    console.log(text);
+  } 
 }
