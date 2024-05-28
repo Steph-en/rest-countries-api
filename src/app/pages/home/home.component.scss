@@ -95,10 +95,11 @@
             }
         }
     }
+}
 
-    .country-section{
-        width: 80%;
-        display: flex;
-        flex-direction: row;
-    }
+.country-section{
+    gap: 50px 50px;
+    width: inherit;
+    display: flex;
+    flex-wrap: wrap;
 }
