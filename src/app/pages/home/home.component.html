@@ -2,7 +2,7 @@
     <form>
         <div class="search-box">
             <fa-icon class="search-icon" [icon] = "search"></fa-icon>
-            <input class="input" type="text" placeholder="Search for a country…">
+            <input class="input" type="text" placeholder="Search for a country…" #filter />
         </div>
         
         <button class="filter-button" (click)="toggle()">Filter by Region

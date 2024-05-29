@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { Interface } from '../interface/interface';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-country',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, RouterLink],
   templateUrl: './country.component.html',
   styleUrl: './country.component.scss'
 })

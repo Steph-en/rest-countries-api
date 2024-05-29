@@ -98,8 +98,8 @@
 }
 
 .country-section{
-    gap: 50px 50px;
     width: inherit;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
