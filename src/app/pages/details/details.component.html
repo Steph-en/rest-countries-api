@@ -1,0 +1,15 @@
+<div class="details" *ngFor="let country of interfaceForm">
+    <div class="back">
+        <fa-icon class="arrow-icon" [icon] = "arrow"></fa-icon>
+        Back
+    </div>
+    <div class="country-details">
+        <div class="flag" [style.background-image]="'url(' + country.flags.svg + ')'"></div>
+        <div class="countryFacts">
+            <h2 class="country">{{ country.name.common }}</h2>
+            <p class="population">Population: {{ country.population }}</p>
+            <p class="region">Region: {{ country.region }}</p>
+            <p class="capital">Capital: {{ country.capital }}</p>
+        </div>
+    </div>
+</div>

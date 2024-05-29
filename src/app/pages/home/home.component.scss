@@ -11,9 +11,9 @@
     }
 
     .search-box {
-        gap: 28px;
+        gap: 26px;
         width: 28%;
-        height: 50px;
+        height: 56px;
         padding: 0 40px;
         border-radius: 5px;
         color: var(--font);
@@ -49,7 +49,7 @@
         border-radius: 5px;
         border: 0;
         width: 15%;
-        height: 50px;
+        height: 56px;
         padding: 0 1%;
         font-size: 16px;
         color: var(--font);
@@ -67,9 +67,9 @@
 
     .drop-down {
         position: absolute;
-        top: 20%;
+        top: 22%;
         right: 4%;
-        width: 13.8%;
+        width: 15.6%;
         height: auto;
         padding: .5% 0;
         border-radius: 5px;
@@ -103,3 +103,9 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+
+
+
+
+

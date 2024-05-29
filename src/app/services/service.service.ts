@@ -1,25 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { Interface } from '../interface/interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
+  private allCountries!: Interface[]; 
   private countryAPI = 'https://restcountries.com/v3.1/all'
 
   constructor(private http: HttpClient) { }
 
-  getAllCountryData(): Observable<Interface[]> {
-    return this.http.get<Interface[]>(this.countryAPI);
+  public getAllCountryData(): Observable<Interface[]> {
+    if(this.allCountries) {
+      return of(this.allCountries)
+    } else {
+      return this.http.get<Interface[]>(this.countryAPI).pipe(
+        tap((countries) => (this.allCountries = countries))
+      )
+    }
   }
-  
-  logAllCountryData(): void {
-    this.getAllCountryData().subscribe(data => {
-      console.log(data);
-    }, error => {
-      console.log('Error fetching country data:', error);
-    });
+
+  public getCountryByName(name: string): Observable<Interface[]> {
+    return of(this.allCountries.filter((country) => country.name.common === name))
   }
 }
