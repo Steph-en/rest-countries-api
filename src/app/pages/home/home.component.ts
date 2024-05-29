@@ -16,12 +16,20 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
   search = faSearch;
+  showFilter = false;
   arrow = faChevronDown;
 
   interfaceForm: Interface[] = [];
   interfaceList: Interface[] = [];
 
   constructor(private appService: ServiceService) {}
+
+  ngOnInit(): void {
+    this.appService.getAllCountryData().subscribe((interfaceForm: Interface[]) => {
+      console.log(interfaceForm);
+      this.interfaceList = interfaceForm;
+    });
+  }
 
   toggle() {
     const dropDown = document.querySelector(".drop-down") as HTMLElement;
@@ -31,21 +39,18 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.appService.getAllCountryData().subscribe((interfaceForm: Interface[]) => {
-      this.interfaceForm = interfaceForm;
-      this.interfaceList = interfaceForm;
-    });
+  toggleFilter() {
+    this.showFilter = !this.showFilter;
   }
 
-  filterResults(text: string) {
-    if (!text) {
-      this.interfaceList = this.interfaceForm;
-    } else {
-      this.interfaceList = this.interfaceForm.filter((item: Interface) =>
-        item.name.official.toLowerCase().includes(text.toLowerCase())
-      );
-    }
-    console.log(text);
-  } 
+  // filterResults(text: string) {
+  //   if (!text) {
+  //     this.interfaceList = this.interfaceForm;
+  //   } else {
+  //     this.interfaceList = this.interfaceForm.filter((item: Interface) =>
+  //       item.name.official.toLowerCase().includes(text.toLowerCase())
+  //     );
+  //   }
+  //   console.log(text);
+  // } 
 }

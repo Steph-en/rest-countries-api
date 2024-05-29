@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { HomeComponent } from "./pages/home/home.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMoon } from '@fortawesome/free-solid-svg-icons'
@@ -9,7 +9,7 @@ import { faMoon } from '@fortawesome/free-solid-svg-icons'
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [RouterOutlet, HomeComponent, FontAwesomeModule]
+    imports: [ RouterModule, HomeComponent, FontAwesomeModule]
 })
 export class AppComponent implements OnInit{
   title = 'rest-countries-api';

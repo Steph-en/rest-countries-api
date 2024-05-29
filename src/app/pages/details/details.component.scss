@@ -1,0 +1,28 @@
+.details {
+    width: 100%;
+    height: 100%;
+    padding: 6% 0;
+    display: flex;
+    flex-direction: column;
+
+    .back{
+        margin: 0 0 6% 0;
+    }
+    
+    
+    .country-details{
+        gap: 40px;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+
+        .flag{
+            width: 40vw;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+}
