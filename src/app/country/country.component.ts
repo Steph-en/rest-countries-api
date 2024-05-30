@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Interface } from '../interface/interface';
 import { RouterModule } from '@angular/router';
-import { ServiceService } from '../services/service.service';
+// import { ServiceService } from '../services/service.service';
 
 
 @Component({
