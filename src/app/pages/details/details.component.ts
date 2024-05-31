@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { RouterModule } from '@angular/router';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-details',

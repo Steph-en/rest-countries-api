@@ -7,23 +7,24 @@
         <div class="flag" [style.background-image]="'url(' + country.flags.svg + ')'"></div>
         <div class="countryFacts">
             <div style="display: flex; flex-direction: column;">
-                <h2 class="country">{{ country.name.common }}</h2>
+                <h2 class="country">{{ country.name.official }}</h2>
                 <div style="display: flex; justify-content: space-between; width: 35vw;">
                     <div>
-                        <p class="population">Native Name: {{ country.name.nativeName }}</p>
-                        <p class="population">Population: {{ country.population }}</p>
-                        <p class="region">Region: {{ country.region }}</p>
-                        <p class="region">Sub Region: {{ country.subregion }}</p>
-                        <p class="capital">Capital: {{ country.capital }}</p>
+                        <p class="population"><span class="bold">Native Name:</span> {{ country.name.official }}</p>
+                        <p class="population"><span class="bold">Population:</span> {{ country.population }}</p>
+                        <p class="region"><span class="bold">Region:</span> {{ country.region }}</p>
+                        <p class="region"><span class="bold">Sub Region:</span> {{ country.subregion }}</p>
+                        <p class="capital"><span class="bold">Capital:</span> {{ country.capital }}</p>
                     </div>
                     <div>
-                        <p class="region">Top Level Domain: {{ country.tld }}</p>
-                        <p class="region">Currencies: {{ country.currencies }}</p>
-                        <p class="capital">Languages: {{ country.languages }}</p>
+                        <p class="region"><span class="bold">Top Level Domain:</span> {{ country.tld }}</p>
+                        <p class="region"><span class="bold">Currencies:</span> {{ country.currencies }}</p>
+                        <p class="capital"><span class="bold">Languages:</span> {{ country.languages }}</p>
                     </div>
                 </div>
-                <div>
-                    <p class="capital">Border Countries: {{ country.borders }}</p>
+                <div class="border">
+                    <p class="capital"><span class="bold">Border Countries:</span></p>
+                    <a [routerLink]="['/details', country.name.common]" *ngFor="let country of interfaceForm">{{ country.borders }}</a>
                 </div>
             </div>
         </div>
