@@ -33,6 +33,14 @@ export class HomeComponent implements OnInit {
   }
 
   toggle() {
+    const dropDown = document.querySelector(".drop-down") as HTMLElement;
+
+    if (dropDown) {
+      dropDown.style.display = dropDown.style.display === 'block' ? 'none' : 'block';
+    }
+  }
+
+  toggleFilter() {
     this.showFilter = !this.showFilter;
   }
 
