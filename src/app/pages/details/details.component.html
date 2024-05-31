@@ -1,6 +1,6 @@
 <div class="details" *ngFor="let country of interfaceForm">
-    <a class="back" [routerLink] = "['/']">
-        <fa-icon class="arrow-icon" [icon] = "arrow"></fa-icon>
+    <a class="back" [routerLink]="['/']">
+        <fa-icon class="arrow-icon" [icon]="arrow"></fa-icon>
         Back
     </a>
     <div class="country-details">
@@ -10,7 +10,7 @@
                 <h2 class="country">{{ country.name.official }}</h2>
                 <div style="display: flex; justify-content: space-between; width: 35vw;">
                     <div>
-                        <p class="population"><span class="bold">Native Name:</span> {{ country.name.official }}</p>
+                        <p class="population"><span class="bold">Native Name:</span> {{ country.name.nativeName }}</p>
                         <p class="population"><span class="bold">Population:</span> {{ country.population }}</p>
                         <p class="region"><span class="bold">Region:</span> {{ country.region }}</p>
                         <p class="region"><span class="bold">Sub Region:</span> {{ country.subregion }}</p>
@@ -18,13 +18,22 @@
                     </div>
                     <div>
                         <p class="region"><span class="bold">Top Level Domain:</span> {{ country.tld }}</p>
-                        <p class="region"><span class="bold">Currencies:</span> {{ country.currencies }}</p>
-                        <p class="capital"><span class="bold">Languages:</span> {{ country.languages }}</p>
+                        <p class="region"><span class="bold">Currencies:</span> {{ getCurrencies(country.currencies) }}
+                        </p>
+                        <p class="capital"><span class="bold">Languages:</span> {{ getLanguages(country.languages) }}
+                        </p>
                     </div>
                 </div>
                 <div class="border">
                     <p class="capital"><span class="bold">Border Countries:</span></p>
-                    <a [routerLink]="['/details', country.name.common]" *ngFor="let country of interfaceForm">{{ country.borders }}</a>
+                    <ng-container *ngIf="borders && borders.length > 0; else noBorders">
+                        <a *ngFor="let borderCountry of borders" [routerLink]="['/details', borderCountry.name.common]">
+                            {{ borderCountry.name.common }}
+                        </a>
+                    </ng-container>
+                    <ng-template #noBorders>
+                        <p class="capital"><span class="bold">No Border Countries</span></p>
+                    </ng-template>
                 </div>
             </div>
         </div>
