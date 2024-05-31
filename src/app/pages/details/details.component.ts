@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { RouterModule } from '@angular/router';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, RouterModule],
+  imports: [CommonModule, FontAwesomeModule, RouterModule,],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
@@ -19,7 +20,7 @@ export class DetailsComponent implements OnInit {
 
   interfaceForm!: Interface[];
 
-  constructor(private route: ActivatedRoute, private countryService: ServiceService) {}
+  constructor(private route: ActivatedRoute, private countryService: ServiceService,) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.getCountryDetails(params['name']);
