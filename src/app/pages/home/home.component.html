@@ -3,7 +3,7 @@
         <div class="search-box">
             <fa-icon class="search-icon" [icon]="search"></fa-icon>
 
-            <input class="input" type="text" placeholder="Search for a country…" (input)="filterCountries($event.target?.value)" />
+            <input class="input" type="text" placeholder="Search for a country…" (input)="filterCountries($event)" />
         </div>
         
         <div class="filter-button" (click)="toggle()">Filter by Region
@@ -21,5 +21,5 @@
 </div>
 
 <div class="country-section">
-     <app-country *ngFor="let interfaceForm of interfaceList" [interfaceForm]="interfaceForm"></app-country>
+     <app-country *ngFor="let interfaceForm of filteredInterfaceList" [interfaceForm]="interfaceForm"></app-country>
 </div>

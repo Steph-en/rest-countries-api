@@ -10,7 +10,7 @@
                 <h2 class="country">{{ country.name.official }}</h2>
                 <div style="display: flex; justify-content: space-between; width: 35vw;">
                     <div>
-                        <p class="population"><span class="bold">Native Name:</span> {{ country.name.nativeName }}</p>
+                        <p class="population"><span class="bold">Native Name:</span> {{ getNativeName(country.name.nativeName) }}</p>
                         <p class="population"><span class="bold">Population:</span> {{ country.population }}</p>
                         <p class="region"><span class="bold">Region:</span> {{ country.region }}</p>
                         <p class="region"><span class="bold">Sub Region:</span> {{ country.subregion }}</p>

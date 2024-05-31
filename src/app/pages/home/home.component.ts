@@ -36,9 +36,11 @@ export class HomeComponent implements OnInit {
     this.showFilter = !this.showFilter;
   }
 
-  filterCountries(searchText: string) {
+  filterCountries(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const searchText = target.value.toLowerCase();
     this.filteredInterfaceList = this.interfaceList.filter((country) =>
-      country.name.common.toLowerCase().includes(searchText.toLowerCase())
+      country.name.common.toLowerCase().includes(searchText)
     );
   }
 }

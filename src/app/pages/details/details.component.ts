@@ -54,6 +54,10 @@ export class DetailsComponent implements OnInit {
     }
   }
 
+  getNativeName(nativeName: { [key: string]: any }): string {
+    return Object.values(nativeName).map(nativeName => nativeName.common).join(', ');
+  }
+
   getCurrencies(currencies: { [key: string]: any }): string {
     return Object.values(currencies).map(currency => currency.name).join(', ');
   }
