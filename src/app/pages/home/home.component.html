@@ -1,16 +1,17 @@
 <div class="search">
     <form>
         <div class="search-box">
-            <fa-icon class="search-icon" [icon] = "search"></fa-icon>
-            <input class="input" type="text" placeholder="Search for a country…" #filter />
+            <fa-icon class="search-icon" [icon]="search"></fa-icon>
+
+            <input class="input" type="text" placeholder="Search for a country…" (input)="filterCountries($event.target?.value)" />
         </div>
         
         <div class="filter-button" (click)="toggle()">Filter by Region
-            <fa-icon class="arrow-icon" [icon] = "arrow"></fa-icon>
+            <fa-icon class="arrow-icon" [icon]="arrow"></fa-icon>
         </div>
 
-        <div class="drop-down" >
-            <li>Affrica</li>
+        <div class="drop-down" *ngIf="showFilter">
+            <li>Africa</li>
             <li>America</li>
             <li>Asia</li>
             <li>Europe</li>
@@ -20,6 +21,5 @@
 </div>
 
 <div class="country-section">
-     <app-country *ngFor="let interfaceForm of interfaceList" [interfaceForm]="interfaceForm" />
+     <app-country *ngFor="let interfaceForm of interfaceList" [interfaceForm]="interfaceForm"></app-country>
 </div>
-

@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
   showFilter = false;
   arrow = faChevronDown;
 
-  interfaceForm: Interface[] = [];
   interfaceList: Interface[] = [];
+  filteredInterfaceList: Interface[] = [];
 
   constructor(private appService: ServiceService) {}
 
@@ -28,29 +28,17 @@ export class HomeComponent implements OnInit {
     this.appService.getAllCountryData().subscribe((interfaceForm: Interface[]) => {
       console.log(interfaceForm);
       this.interfaceList = interfaceForm;
+      this.filteredInterfaceList = [...this.interfaceList];
     });
   }
 
   toggle() {
-    const dropDown = document.querySelector(".drop-down") as HTMLElement;
-
-    if (dropDown) {
-      dropDown.style.display = dropDown.style.display === 'block' ? 'none' : 'block';
-    }
-  }
-
-  toggleFilter() {
     this.showFilter = !this.showFilter;
   }
 
-  // filterResults(text: string) {
-  //   if (!text) {
-  //     this.interfaceList = this.interfaceForm;
-  //   } else {
-  //     this.interfaceList = this.interfaceForm.filter((item: Interface) =>
-  //       item.name.official.toLowerCase().includes(text.toLowerCase())
-  //     );
-  //   }
-  //   console.log(text);
-  // } 
+  filterCountries(searchText: string) {
+    this.filteredInterfaceList = this.interfaceList.filter((country) =>
+      country.name.common.toLowerCase().includes(searchText.toLowerCase())
+    );
+  }
 }
