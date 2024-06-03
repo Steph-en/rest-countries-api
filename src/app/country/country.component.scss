@@ -17,6 +17,7 @@ a {
         border-radius: 10px;
         color: var(--font);
         background-color: var(--card-bg);
+        overflow: hidden;
 
         .flag {
             width: 100%;
@@ -24,7 +25,6 @@ a {
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            border-radius: 10px 10px 0 0;
         }
 
         .info {
