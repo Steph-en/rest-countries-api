@@ -47,3 +47,9 @@ a {
         }
     }
 }
+
+@media screen and (max-width: 375px) {
+    .cards{
+        width: 76vw;
+    }
+}

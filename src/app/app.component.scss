@@ -41,14 +41,14 @@ main {
 @media screen and (max-width: 375px) {
     main {
         .head {
-            width: 100%;
+            width: inherit;
 
             h1 {
-                font-size: 16px;
+                font-size: 14px;
             }
 
             p {
-                font-size: 16px;
+                font-size: 14px;
             }
         }
     }

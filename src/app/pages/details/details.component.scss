@@ -78,3 +78,49 @@
         }
     }
 }
+
+@media screen and (max-width: 375px) {
+    .details{
+        padding: 10% 0;
+
+        .back{
+            width: 40%;
+            margin: 0 0 10% 0;
+        }
+
+        .country-details{
+            flex-direction: column;
+
+            .flag{
+                width: inherit;
+                height: 40vh;
+            }
+
+            .countryFacts{
+                font-size: 14px;
+                width: inherit;
+                flex-direction: column;
+
+                .pop{
+                    width: 100%;
+                    flex-direction: column;
+
+                    .pop1{
+                        width: 60vw;
+                    }
+
+                    .pop2{
+                        width: 60vw;
+                    }
+                }
+
+                .border{
+                    gap: 20px;
+                }
+                .border a{
+                    padding: 0 20px;
+                }
+            }
+        }
+    }
+}
