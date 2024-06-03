@@ -8,15 +8,15 @@
         <div class="countryFacts">
             <div style="display: flex; flex-direction: column;">
                 <h2 class="country">{{ country.name.official }}</h2>
-                <div style="display: flex; justify-content: space-between; width: 35vw;">
-                    <div>
+                <div class="pop" style="display: flex; justify-content: space-between; width: 35vw;">
+                    <div class="pop1">
                         <p class="population"><span class="bold">Native Name:</span> {{ getNativeName(country.name.nativeName) }}</p>
                         <p class="population"><span class="bold">Population:</span> {{ country.population }}</p>
                         <p class="region"><span class="bold">Region:</span> {{ country.region }}</p>
                         <p class="region"><span class="bold">Sub Region:</span> {{ country.subregion }}</p>
                         <p class="capital"><span class="bold">Capital:</span> {{ country.capital }}</p>
                     </div>
-                    <div>
+                    <div class="pop2">
                         <p class="region"><span class="bold">Top Level Domain:</span> {{ country.tld }}</p>
                         <p class="region"><span class="bold">Currencies:</span> {{ getCurrencies(country.currencies) }}
                         </p>
