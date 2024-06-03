@@ -1,8 +1,8 @@
-main{
-    width: inherit;
-    height: inherit;
+main {
+    width: auto;
+    height: 100vh;
 
-    .head{
+    .head {
         color: var(--font);
         width: auto;
         height: 10%;
@@ -14,26 +14,42 @@ main{
         box-shadow: 0 0 5px .1px var(--shadow);
         background-color: var(--head);
 
-        p{
+        p {
             gap: 10px;
             display: flex;
             align-items: center;
 
-            img{
+            img {
                 width: 20px;
                 height: 20px;
             }
         }
 
-        p:hover{
-            cursor: pointer;   
+        p:hover {
+            cursor: pointer;
         }
     }
 
-    .content{
+    .content {
         margin: 0;
         padding: 0 4%;
         width: inherit;
         height: 100%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    main {
+        .head {
+            width: auto;
+
+            h1 {
+                font-size: 16px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
     }
 }
