@@ -1,11 +1,15 @@
-<main >
+<html>
+<main>
+
     <head class="head">
         <h1>Where in the world?</h1>
 
-        <p (click)="toggle()"><fa-icon [icon] = "moon"></fa-icon> Dark Mode</p>
+        <p (click)="toggle()"><fa-icon [icon]="moon"></fa-icon> Dark Mode</p>
     </head>
 
     <section class="content">
         <router-outlet />
     </section>
 </main>
+
+</html>
