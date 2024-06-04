@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.appService.getAllCountryData().subscribe((interfaceForm: Interface[]) => {
-      console.log(interfaceForm);
+      // console.log(interfaceForm);
       this.interfaceList = interfaceForm;
       this.filteredInterfaceList = [...this.interfaceList];
     });
@@ -50,5 +50,9 @@ export class HomeComponent implements OnInit {
     this.filteredInterfaceList = this.interfaceList.filter((country) =>
       country.name.common.toLowerCase().includes(searchText)
     );
+  }
+
+  filterRegion() {
+    
   }
 }

@@ -8,8 +8,8 @@ import { Interface } from '../interface/interface';
   providedIn: 'root'
 })
 export class ServiceService {
-  private allCountries!: Interface[];
   private countryAPI = 'https://restcountries.com/v3.1/all';
+  private allCountries!: Interface[];
 
   constructor(private http: HttpClient) {}
 
@@ -29,5 +29,9 @@ export class ServiceService {
 
   public getCountryByCode(code: string): Observable<Interface[]> {
     return of(this.allCountries.filter((country) => country.cca3 === code));
+  }
+
+  public getFilteredCountriesByRegion(region: string): Observable<Interface[]> {
+    return of(this.allCountries.filter((country) => country.region === region))
   }
 }
