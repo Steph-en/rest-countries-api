@@ -11,7 +11,7 @@ export class ServiceService {
   private countryAPI = 'https://restcountries.com/v3.1/all';
   private allCountries!: Interface[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public getAllCountryData(): Observable<Interface[]> {
     if (this.allCountries) {
@@ -32,6 +32,10 @@ export class ServiceService {
   }
 
   public getFilteredCountriesByRegion(region: string): Observable<Interface[]> {
-    return of(this.allCountries.filter((country) => country.region === region))
+    if (!this.allCountries) {
+      return of([]);
+    }
+    const filteredCountries = this.allCountries.filter((country) => country.region.toLowerCase() === region.toLowerCase());
+    return of(filteredCountries);
   }
 }

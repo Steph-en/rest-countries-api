@@ -10,12 +10,8 @@
             <fa-icon class="arrow-icon" [icon]="arrow"></fa-icon>
         </div>
 
-        <div class="drop-down">
-            <li (click)="filterRegion()">Africa</li>
-            <li (click)="filterRegion()">America</li>
-            <li (click)="filterRegion()">Asia</li>
-            <li (click)="filterRegion()">Europe</li>
-            <li (click)="filterRegion()">Oceania</li>
+        <div class="drop-down" *ngIf="showFilter">
+            <li *ngFor="let region of regions" (click)="filterRegion(region)">{{ region }}</li>
         </div>
     </form>       
 </div>

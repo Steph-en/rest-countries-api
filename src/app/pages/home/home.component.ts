@@ -21,26 +21,19 @@ export class HomeComponent implements OnInit {
 
   interfaceList: Interface[] = [];
   filteredInterfaceList: Interface[] = [];
+  regions: string[] = [];
 
   constructor(private appService: ServiceService) {}
 
   ngOnInit(): void {
     this.appService.getAllCountryData().subscribe((interfaceForm: Interface[]) => {
-      // console.log(interfaceForm);
       this.interfaceList = interfaceForm;
       this.filteredInterfaceList = [...this.interfaceList];
+      this.regions = [...new Set(this.interfaceList.map(country => country.region))];
     });
   }
 
   toggle() {
-    const dropDown = document.querySelector(".drop-down") as HTMLElement;
-
-    if (dropDown) {
-      dropDown.style.display = dropDown.style.display === 'block' ? 'none' : 'block';
-    }
-  }
-
-  toggleFilter() {
     this.showFilter = !this.showFilter;
   }
 
@@ -52,7 +45,10 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  filterRegion() {
-    
+  filterRegion(region: string) {
+    this.appService.getFilteredCountriesByRegion(region).subscribe((filteredCountries) => {
+      this.filteredInterfaceList = filteredCountries;
+      this.showFilter =false;
+    });
   }
 }
