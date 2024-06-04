@@ -10,7 +10,7 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: HomeComponent,
+        loadComponent: () => import("./pages/home/home.component").then((c) => c.HomeComponent),
         title: 'Home Page| Rest Countries API'
     },
     {
