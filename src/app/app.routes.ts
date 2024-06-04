@@ -10,12 +10,12 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: HomeComponent,
+        loadComponent: () => import("./pages/home/home.component").then((c) => c.HomeComponent),
         title: 'Home Page| Rest Countries API'
     },
     {
         path: 'details/:name',
-        component: DetailsComponent,
+        loadComponent: () => import("./pages/details/details.component").then((c) => c.DetailsComponent),
         title: 'Details Page| Rest Countries API'
     }
 ];
