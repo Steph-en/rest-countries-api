@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
     styleUrl: './home.component.scss',
     imports: [FontAwesomeModule, RouterOutlet, CountryComponent, CommonModule]
 })
+
 export class HomeComponent implements OnInit {
   search = faSearch;
   showFilter = false;

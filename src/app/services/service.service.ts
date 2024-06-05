@@ -7,6 +7,7 @@ import { Interface } from '../interface/interface';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ServiceService {
   private countryAPI = 'https://restcountries.com/v3.1/all';
   private allCountries: Interface[] | null = null;

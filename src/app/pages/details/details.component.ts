@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
+
 export class DetailsComponent implements OnInit {
   arrow = faArrowLeft;
   country!: Interface;
