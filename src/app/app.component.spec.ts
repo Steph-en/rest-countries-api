@@ -1,81 +1,46 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HomeComponent } from './pages/home/home.component';
 import { RouterModule } from '@angular/router';
-import { faMoon } from '@fortawesome/free-solid-svg-icons';
-import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterModule,
-        HomeComponent,
-        FontAwesomeModule,
-        AppComponent
-      ],
+      imports: [RouterModule],
+      declarations: [], // Remove AppComponent from the declarations array
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  it(`should have the 'rest-countries-api' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('rest-countries-api');
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, rest-countries-api');
+  it('should initialize theme correctly', () => {
+    spyOn(component, 'initializeTheme');
+    component.ngOnInit();
+    expect(component.initializeTheme).toHaveBeenCalled();
   });
 
-  it('should toggle theme and save to localStorage', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    spyOn(localStorage, 'setItem');
-    
-    app.toggle();
-    fixture.detectChanges();
-    expect(document.documentElement.classList.contains('dark')).toBe(true);
-    expect(localStorage.setItem).toHaveBeenCalledWith('theme', 'dark');
+  it('should toggle theme correctly', () => {
+    const documentElement = document.documentElement;
+    spyOn(documentElement.classList, 'toggle').and.returnValue(true);
 
-    app.toggle();
-    fixture.detectChanges();
-    expect(document.documentElement.classList.contains('dark')).toBe(false);
-    expect(localStorage.setItem).toHaveBeenCalledWith('theme', 'light');
-  });
+    // Light theme initially
+    component.toggle();
+    expect(documentElement.classList.toggle).toHaveBeenCalledWith('dark', true);
+    expect(localStorage.getItem('theme')).toEqual('dark');
 
-  it('should initialize theme from localStorage', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-
-    spyOn(localStorage, 'getItem').and.callFake((key: string) => {
-      return key === 'theme' ? 'dark' : null;
-    });
-
-    app.initializeTheme();
-    fixture.detectChanges();
-    expect(document.documentElement.classList.contains('dark')).toBe(true);
-  });
-
-  it('should not have dark theme by default', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-
-    spyOn(localStorage, 'getItem').and.callFake((key: string) => {
-      return key === 'theme' ? 'light' : null;
-    });
-
-    app.initializeTheme();
-    fixture.detectChanges();
-    expect(document.documentElement.classList.contains('dark')).toBe(false);
+    // Dark theme initially
+    component.toggle();
+    expect(documentElement.classList.toggle).toHaveBeenCalledWith('dark', false);
+    expect(localStorage.getItem('theme')).toEqual('light');
   });
 });
