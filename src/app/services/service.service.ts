@@ -9,7 +9,7 @@ import { Interface } from '../interface/interface';
 })
 export class ServiceService {
   private countryAPI = 'https://restcountries.com/v3.1/all';
-  private allCountries!: Interface[];
+  private allCountries: Interface[] | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -24,10 +24,16 @@ export class ServiceService {
   }
 
   public getCountryByName(name: string): Observable<Interface[]> {
+    if (!this.allCountries) {
+      return of([]);
+    }
     return of(this.allCountries.filter((country) => country.name.common === name));
   }
 
   public getCountryByCode(code: string): Observable<Interface[]> {
+    if (!this.allCountries) {
+      return of([]);
+    }
     return of(this.allCountries.filter((country) => country.cca3 === code));
   }
 
