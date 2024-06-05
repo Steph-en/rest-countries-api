@@ -4,7 +4,6 @@ import { Interface } from '../interface/interface';
 import { RouterModule } from '@angular/router';
 // import { ServiceService } from '../services/service.service';
 
-
 @Component({
   selector: 'app-country',
   standalone: true,
@@ -12,6 +11,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './country.component.html',
   styleUrl: './country.component.scss'
 })
+
 export class CountryComponent {
   @Input() interfaceForm!: Interface;
 }

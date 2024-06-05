@@ -11,6 +11,7 @@ import { faMoon } from '@fortawesome/free-solid-svg-icons'
     styleUrl: './app.component.scss',
     imports: [ RouterModule, HomeComponent, FontAwesomeModule]
 })
+
 export class AppComponent implements OnInit{
   title = 'rest-countries-api';
   moon = faMoon;
