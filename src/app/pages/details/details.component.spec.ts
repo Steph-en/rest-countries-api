@@ -14,9 +14,9 @@ describe('DetailsComponent', () => {
   let service: ServiceService;
 
   const mockCountry: Interface = {
-    name: { 
-      common: 'Country1', 
-      official: 'Official Country1', 
+    name: {
+      common: 'Country1',
+      official: 'Official Country1',
       nativeName: {
         eng: {
           official: 'Official Country1 Native',
@@ -37,9 +37,9 @@ describe('DetailsComponent', () => {
   };
 
   const mockBorderCountry: Interface = {
-    name: { 
-      common: 'Country2', 
-      official: 'Official Country2', 
+    name: {
+      common: 'Country2',
+      official: 'Official Country2',
       nativeName: {
         eng: {
           official: 'Official Country2 Native',
