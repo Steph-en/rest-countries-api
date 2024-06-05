@@ -10,17 +10,17 @@
                 <h2 class="country">{{ country.name.official }}</h2>
                 <div class="pop" style="display: flex; justify-content: space-between; width: 35vw;">
                     <div class="pop1">
-                        <p class="population"><span class="bold">Native Name:</span> {{ getNativeName(country.name.nativeName) }}</p>
-                        <p class="population"><span class="bold">Population:</span> {{ country.population }}</p>
-                        <p class="region"><span class="bold">Region:</span> {{ country.region }}</p>
-                        <p class="region"><span class="bold">Sub Region:</span> {{ country.subregion }}</p>
-                        <p class="capital"><span class="bold">Capital:</span> {{ country.capital }}</p>
+                        <p class="population"><span class="bold">Native Name:</span>{{ getNativeName(country.name.nativeName) }}</p>
+                        <p class="population"><span class="bold">Population:</span>{{ country.population }}</p>
+                        <p class="region"><span class="bold">Region:</span>{{ country.region }}</p>
+                        <p class="region"><span class="bold">Sub Region:</span>{{ country.subregion }}</p>
+                        <p class="capital"><span class="bold">Capital:</span>{{ country.capital }}</p>
                     </div>
                     <div class="pop2">
-                        <p class="region"><span class="bold">Top Level Domain:</span> {{ country.tld }}</p>
-                        <p class="region"><span class="bold">Currencies:</span> {{ getCurrencies(country.currencies) }}
+                        <p class="region"><span class="bold">Top Level Domain:</span>{{ country.tld }}</p>
+                        <p class="region"><span class="bold">Currencies:</span>{{ getCurrencies(country.currencies) }}
                         </p>
-                        <p class="capital"><span class="bold">Languages:</span> {{ getLanguages(country.languages) }}
+                        <p class="capital"><span class="bold">Languages:</span>{{ getLanguages(country.languages) }}
                         </p>
                     </div>
                 </div>
