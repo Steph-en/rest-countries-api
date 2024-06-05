@@ -83,6 +83,4 @@ describe('ServiceService', () => {
       expect(countries[0].name.common).toBe(name);
     });
   });
-
-  // Add similar tests for getCountryByCode and getFilteredCountriesByRegion
 });
