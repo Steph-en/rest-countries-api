@@ -22,7 +22,11 @@ describe('CountryComponent', () => {
       png: '',
       alt: ''
     },
-    // Add other necessary properties for the Interface
+    subregion: '',
+    tld: '',
+    languages: {},
+    currencies: {},
+    borders: []
   };
 
   beforeEach(async () => {
