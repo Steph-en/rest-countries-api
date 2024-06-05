@@ -27,7 +27,9 @@ export class ServiceService {
     if (!this.allCountries) {
       return of([]);
     }
-    return of(this.allCountries.filter((country) => country.name.common === name));
+    return of(this.allCountries.filter((country) => { 
+      return country.name.common === name;
+    }));
   }
 
   public getCountryByCode(code: string): Observable<Interface[]> {
