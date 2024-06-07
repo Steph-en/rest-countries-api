@@ -9,7 +9,7 @@ describe('CountryComponent', () => {
   let fixture: ComponentFixture<CountryComponent>;
   let activatedRoute: jasmine.SpyObj<ActivatedRoute>
 
-  const mockCountry: Interface | null = {
+  const mockCountry: Interface = {
     name: {
       common: 'Country', 
       official: 'Official Country',
@@ -49,8 +49,8 @@ describe('CountryComponent', () => {
 
   it('should render country details', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.country-name')?.textContent).toContain(mockCountry.name.official);
-    expect(compiled.querySelector('.capital')?.textContent).toContain('Capital: ' + mockCountry.capital);
+    expect(compiled.querySelector('.country')?.textContent).toContain(mockCountry.name.common);
+    expect(compiled.querySelector('.capital')?.textContent).toContain('Capital: '+ mockCountry.capital);
     expect(compiled.querySelector('.population')?.textContent).toContain('Population: ' + mockCountry.population);
     expect(compiled.querySelector('.region')?.textContent).toContain('Region: ' + mockCountry.region);
   });
