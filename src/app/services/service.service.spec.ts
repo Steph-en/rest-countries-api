@@ -23,27 +23,42 @@ class ServiceServiceMock {
         flags: { png: 'flag.png', svg: 'flag.svg', alt: 'Flag' },
         cca3: 'C1'
       },
-      
+      {
+        name: { common: 'Country 2', nativeName: {}, official: 'Official Name 2' },
+        capital: 'Capital 2',
+        population: 1000000,
+        region: 'Region 2',
+        subregion: 'Subregion 2',
+        tld: '.co',
+        languages: {
+          eng: { name: 'English', nativeName: 'English' }, // Valid language object
+          spa: { name: 'Spanish', nativeName: 'Español' } // Valid language object
+        },
+        currencies: { usd: { name: 'US Dollar', symbol: '$' } },
+        borders: ['Border 2', 'Border 3'],
+        flags: { png: 'flag.png', svg: 'flag.svg', alt: 'Flag' },
+        cca3: 'C2'
+      }
     ]);
   }
 }
 
 describe('ServiceService', () => {
-  // let service: ServiceService;
-  // let httpMock: HttpTestingController;
+  let service: ServiceService;
+  let httpMock: HttpTestingController;
 
-  // beforeEach(() => {
-  //   TestBed.configureTestingModule({
-  //     imports: [HttpClientTestingModule],
-  //     providers: [{ provide: ServiceService, useClass: ServiceServiceMock }]
-  //   });
-  //   service = TestBed.inject(ServiceService);
-  //   httpMock = TestBed.inject(HttpTestingController);
-  // });
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [{ provide: ServiceService, useClass: ServiceServiceMock }]
+    });
+    service = TestBed.inject(ServiceService);
+    httpMock = TestBed.inject(HttpTestingController);
+  });
 
-  // afterEach(() => {
-  //   httpMock.verify(); // Ensure that there are no outstanding requests
-  // });
+  afterEach(() => {
+    httpMock.verify();
+  });
 
   it('should return all country data', () => {
     // service.getAllCountryData().subscribe((countries) => {
