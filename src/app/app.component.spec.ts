@@ -1,16 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute  } from '@angular/router';
 import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
+  let activatedRoute: jasmine.SpyObj<ActivatedRoute>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterModule],
-      declarations: [], // Remove AppComponent from the declarations array
+      imports: [AppComponent, RouterModule],
+      declarations: [],
+      providers: [{
+        provide: ActivatedRoute, useValue: activatedRoute
+      }]
     }).compileComponents();
   });
 
@@ -30,22 +34,9 @@ describe('AppComponent', () => {
     expect(component.initializeTheme).toHaveBeenCalled();
   });
 
-  // it('should toggle theme correctly', () => {
-  //   const documentElement = document.documentElement;
-  //   spyOn(documentElement.classList, 'toggle').and.returnValue(true);
-
-  //   // Light theme initially
-  //   component.toggle();
-  //   expect(documentElement.classList.toggle).toHaveBeenCalledWith('dark');
-  //   expect(localStorage.getItem('theme')).toEqual('dark');
-
-  //   // Dark theme initially
-  // });
-
   it('should toggle to dark theme', () => {
     const documentElement = document.documentElement;
     spyOn(documentElement.classList, 'toggle').and.returnValue(true);
-
     component.toggle();
     expect(documentElement.classList.toggle).toHaveBeenCalledWith('dark');
     expect(localStorage.getItem('theme')).toEqual('dark');
