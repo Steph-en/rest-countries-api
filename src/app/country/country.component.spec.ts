@@ -1,22 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { Interface } from '../interface/interface';
 import { CountryComponent } from './country.component';
+import { ActivatedRoute } from '@angular/router';
 
 describe('CountryComponent', () => {
   let component: CountryComponent;
   let fixture: ComponentFixture<CountryComponent>;
+  let activatedRoute: jasmine.SpyObj<ActivatedRoute>
 
-  const mockCountry: Interface = {
+  const mockCountry: Interface | null = {
     name: {
-      common: 'Country1', official: 'Official Country1',
+      common: 'Country', 
+      official: 'Official Country',
       nativeName: {}
     },
-    capital: 'Capital1',
+    capital: 'Capital',
     population: 1000000,
-    region: 'Region1',
-    subregion: 'Subregion1',
+    region: 'Region',
+    subregion: 'Subregion',
     tld: '.c1',
     languages: { eng: { name: 'English', nativeName: 'English' } },
     currencies: { curr1: { name: 'Currency1', symbol: '$' } },
@@ -27,8 +29,10 @@ describe('CountryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CountryComponent],
-      imports: [CommonModule, RouterModule]
+      imports: [CountryComponent,CommonModule],
+      providers: [{
+        provide: ActivatedRoute, useValue: activatedRoute
+      }]
     }).compileComponents();
   });
 
@@ -45,9 +49,9 @@ describe('CountryComponent', () => {
 
   it('should render country details', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.country-name').textContent).toContain(mockCountry.name.common);
-    expect(compiled.querySelector('.capital').textContent).toContain('Capital: ' + mockCountry.capital);
-    expect(compiled.querySelector('.population').textContent).toContain('Population: ' + mockCountry.population);
-    // Add more expectations for other details as needed
+    expect(compiled.querySelector('.country-name')?.textContent).toContain(mockCountry.name.official);
+    expect(compiled.querySelector('.capital')?.textContent).toContain('Capital: ' + mockCountry.capital);
+    expect(compiled.querySelector('.population')?.textContent).toContain('Population: ' + mockCountry.population);
+    expect(compiled.querySelector('.region')?.textContent).toContain('Region: ' + mockCountry.region);
   });
 });

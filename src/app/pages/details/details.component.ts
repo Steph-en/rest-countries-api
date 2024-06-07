@@ -63,7 +63,7 @@ export class DetailsComponent implements OnInit {
     return Object.values(currencies).map(currency => currency.name).join(', ');
   }
 
-  getLanguages(languages: { [key: string]: any }): string {
-    return Object.values(languages).join(', ');
+  getLanguages(languages: { [key: string]: { name: string; nativeName: string } }){
+    return Object.values(languages);
   }
 }

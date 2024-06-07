@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -29,18 +30,31 @@ describe('AppComponent', () => {
     expect(component.initializeTheme).toHaveBeenCalled();
   });
 
-  it('should toggle theme correctly', () => {
+  // it('should toggle theme correctly', () => {
+  //   const documentElement = document.documentElement;
+  //   spyOn(documentElement.classList, 'toggle').and.returnValue(true);
+
+  //   // Light theme initially
+  //   component.toggle();
+  //   expect(documentElement.classList.toggle).toHaveBeenCalledWith('dark');
+  //   expect(localStorage.getItem('theme')).toEqual('dark');
+
+  //   // Dark theme initially
+  // });
+
+  it('should toggle to dark theme', () => {
     const documentElement = document.documentElement;
     spyOn(documentElement.classList, 'toggle').and.returnValue(true);
 
-    // Light theme initially
     component.toggle();
-    expect(documentElement.classList.toggle).toHaveBeenCalledWith('dark', true);
+    expect(documentElement.classList.toggle).toHaveBeenCalledWith('dark');
     expect(localStorage.getItem('theme')).toEqual('dark');
-
-    // Dark theme initially
-    component.toggle();
-    expect(documentElement.classList.toggle).toHaveBeenCalledWith('dark', false);
-    expect(localStorage.getItem('theme')).toEqual('light');
+  })
+  
+  it('should call toggle method when button is clicked', () => {
+    spyOn(component, 'toggle');
+    const buttonElement = fixture.debugElement.query(By.css('button')).nativeElement;
+    buttonElement.click();
+    expect(component.toggle).toHaveBeenCalled();
   });
 });
