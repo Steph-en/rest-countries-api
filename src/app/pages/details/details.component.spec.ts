@@ -114,6 +114,6 @@ describe('DetailsComponent', () => {
 
   it('should return languages correctly', () => {
     const languages = component.getLanguages(mockCountry.languages);
-    expect(languages).toBe('English');
+    expect(languages).toEqual([{name: 'English', nativeName: 'English'}]);
   });
 });
