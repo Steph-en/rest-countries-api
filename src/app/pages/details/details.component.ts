@@ -49,6 +49,8 @@ export class DetailsComponent implements OnInit {
         this.countryService.getCountryByCode(borderCode).subscribe((countries) => {
           if (countries.length > 0) {
             this.borders.push(countries[0]);
+            console.log(countries);
+            
           }
         });
       });

@@ -28,7 +28,7 @@ export class ServiceService {
     if (!this.allCountries) {
       return of([]);
     }
-    return of(this.allCountries.filter((country) => { 
+    return of(this.allCountries.filter((country) => {
       return country.name.common === name;
     }));
   }
