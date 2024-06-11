@@ -51,5 +51,13 @@ a {
 @media screen and (max-width: 768px) {
     .cards{
         width: 76vw;
+
+        .flag {
+            width: 100%;
+            height: auto;
+            background-size:contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
     }
 }
