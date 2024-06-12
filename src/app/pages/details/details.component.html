@@ -7,8 +7,8 @@
         <div class="flag" [style.background-image]="'url(' + country.flags.svg + ')'"></div>
         <div class="countryFacts">
             <div style="display: flex; flex-direction: column;">
-                <h2 class="country">{{ country.name.official }}</h2>
-                <div class="pop" style="display: flex; justify-content: space-between; width: 35vw;">
+                <h2 class="country font-bold text-2xl">{{ country.name.official }}</h2>
+                <div class="pop my-16" style="display: flex; justify-content: space-between; width: 35vw;">
                     <div class="pop1">
                         <p class="population"><span class="bold">Native Name:</span>{{ getNativeName(country.name.nativeName) }}</p>
                         <p class="population"><span class="bold">Population:</span>{{ country.population }}</p>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="border">
-                    <p class="capital"><span class="bold">Border Countries:</span></p>
+                    <p class="capital"><span class="font-medium">Border Countries:</span></p>
                     <ng-container *ngIf="borders && borders.length > 0; else noBorders">
                         <a *ngFor="let borderCountry of borders" [routerLink]="['/details', borderCountry.name.common]">
                             {{ borderCountry.name.common }}
