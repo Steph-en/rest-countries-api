@@ -10,17 +10,16 @@
                 <h2 class="country font-bold text-2xl">{{ country.name.official }}</h2>
                 <div class="pop my-16" style="display: flex; justify-content: space-between; width: 35vw;">
                     <div class="pop1">
-                        <p class="population"><span class="bold">Native Name:</span>{{ getNativeName(country.name.nativeName) }}</p>
-                        <p class="population"><span class="bold">Population:</span>{{ country.population }}</p>
-                        <p class="region"><span class="bold">Region:</span>{{ country.region }}</p>
-                        <p class="region"><span class="bold">Sub Region:</span>{{ country.subregion }}</p>
-                        <p class="capital"><span class="bold">Capital:</span>{{ country.capital }}</p>
+                        <p class="population my-2"><span class="font-semibold">Native Name:</span>{{ getNativeName(country.name.nativeName) }}</p>
+                        <p class="population my-2"><span class="font-semibold">Population:</span>{{ country.population }}</p>
+                        <p class="region my-2"><span class="font-semibold">Region:</span>{{ country.region }}</p>
+                        <p class="region my-2"><span class="font-semibold">Sub Region:</span>{{ country.subregion }}</p>
+                        <p class="capital my-2"><span class="font-semibold">Capital:</span>{{ country.capital }}</p>
                     </div>
                     <div class="pop2">
-                        <p class="region"><span class="bold">Top Level Domain:</span>{{ country.tld }}</p>
-                        <p class="region"><span class="bold">Currencies:</span>{{ getCurrencies(country.currencies) }}
-                        </p>
-                        <p class="capital"><span class="bold">Languages:</span>{{ getLanguages(country.languages) }}
+                        <p class="region my-2"><span class="font-semibold">Top Level Domain:</span>{{ country.tld }}</p>
+                        <p class="region my-2"><span class="font-semibold">Currencies:</span>{{ getCurrencies(country.currencies) }}</p>
+                        <p class="capital my-2"><span class="font-semibold">Languages:</span>{{ getLanguages(country.languages) }}
                         </p>
                     </div>
                 </div>
