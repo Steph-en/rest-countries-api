@@ -10,11 +10,11 @@
                 <h2 class="country font-bold text-4xl">{{ country.name.official }}</h2>
                 <div class="pop my-16" style="display: flex; justify-content: space-between; width: 35vw;">
                     <div class="pop1">
-                        <p class="population my-2 text-lg"><span class="font-semibold">Native Name: </span>{{ getNativeName(country.name.nativeName) }}</p>
-                        <p class="population my-2 text-lg"><span class="font-semibold">Population: </span>{{ country.population }}</p>
-                        <p class="region my-2 text-lg"><span class="font-semibold">Region: </span>{{ country.region }}</p>
-                        <p class="region my-2 text-lg"><span class="font-semibold">Sub Region: </span>{{ country.subregion }}</p>
-                        <p class="capital my-2 text-lg"><span class="font-semibold">Capital: </span>{{ country.capital }}</p>
+                        <p class="population my-2 text-lg font-extralight"><span class="font-semibold">Native Name: </span>{{ getNativeName(country.name.nativeName) }}</p>
+                        <p class="population my-2 text-lg font-extralight"><span class="font-semibold">Population: </span>{{ country.population }}</p>
+                        <p class="region my-2 text-lg font-extralight"><span class="font-semibold">Region: </span>{{ country.region }}</p>
+                        <p class="region my-2 text-lg font-extralight"><span class="font-semibold">Sub Region: </span>{{ country.subregion }}</p>
+                        <p class="capital my-2 text-lg font-extralight"><span class="font-semibold">Capital: </span>{{ country.capital }}</p>
                     </div>
                     <div class="pop2">
                         <p class="region my-2 text-lg"><span class="font-semibold">Top Level Domain: </span>{{ country.tld }}</p>
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="border">
-                    <p class="capital text-lg"><span class="font-medium">Border Countries:</span></p>
+                    <p class="capital text-lg"><span class="font-semibold">Border Countries:</span></p>
                     <ng-container *ngIf="borders && borders.length > 0; else noBorders">
                         <a *ngFor="let borderCountry of borders" [routerLink]="['/details', borderCountry.name.common]">
                             {{ borderCountry.name.common }}
