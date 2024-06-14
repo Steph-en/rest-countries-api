@@ -22,7 +22,6 @@ export class AppComponent implements OnInit{
     const theme = document.documentElement.classList.toggle('dark');
     console.log(theme);
     
-
     localStorage.setItem("theme", theme ? 'dark' : 'light');
   }
 
