@@ -1,4 +1,4 @@
-<div class="search">
+<section class="search">
     <form>
         <div class="search-box">
             <fa-icon class="search-icon" [icon]="search"></fa-icon>
@@ -14,7 +14,7 @@
             <li *ngFor="let region of regions" (click)="filterRegion(region)">{{ region }}</li>
         </div>
     </form>       
-</div>
+</section>
 
 <div class="country-section">
      <app-country *ngFor="let interfaceForm of filteredInterfaceList" [interfaceForm]="interfaceForm"></app-country>
