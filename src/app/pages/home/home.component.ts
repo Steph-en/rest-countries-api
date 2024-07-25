@@ -6,7 +6,6 @@ import { Interface } from '../../interface/interface';
 import { RouterOutlet } from '@angular/router';
 import { ServiceService } from '../../services/service.service';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-home',

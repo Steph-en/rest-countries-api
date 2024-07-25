@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Interface } from '../interface/interface';
 import { RouterLink } from '@angular/router';
-// import { ServiceService } from '../services/service.service';
 
 @Component({
   selector: 'app-country',

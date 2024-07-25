@@ -20,7 +20,6 @@ export class AppComponent implements OnInit{
 
   toggle() {
     const theme = document.documentElement.classList.toggle('dark');
-    
     localStorage.setItem("theme", theme ? 'dark' : 'light');
   }
 
