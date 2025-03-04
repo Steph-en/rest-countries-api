@@ -3,7 +3,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { CountryComponent } from "../../country/country.component";
 import { Interface } from '../../interface/interface';
-import { RouterOutlet } from '@angular/router';
 import { ServiceService } from '../../services/service.service';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +11,7 @@ import { CommonModule } from '@angular/common';
     standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
-    imports: [FontAwesomeModule, RouterOutlet, CountryComponent, CommonModule]
+    imports: [FontAwesomeModule, CountryComponent, CommonModule]
 })
 
 export class HomeComponent implements OnInit {
