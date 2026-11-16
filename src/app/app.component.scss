@@ -17,21 +17,6 @@ main {
         a:hover {
             cursor: pointer;
         }
-
-        p {
-            gap: 10px;
-            display: flex;
-            align-items: center;
-
-            img {
-                width: 20px;
-                height: 20px;
-            }
-        }
-
-        p:hover {
-            cursor: pointer;
-        }
     }
 
     .content {
@@ -48,10 +33,6 @@ main {
             width: inherit;
 
             a {
-                font-size: 14px;
-            }
-
-            p {
                 font-size: 14px;
             }
         }

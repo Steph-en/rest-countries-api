@@ -11,11 +11,11 @@ export const routes: Routes = [
     {
         path: 'home',
         loadComponent: () => import("./pages/home/home.component").then((c) => c.HomeComponent),
-        title: 'Home Page| Rest Countries API'
+        title: 'Home Page | Rest Countries API'
     },
     {
         path: 'details/:name',
         component: DetailsComponent,
-        title: 'Details Page| Rest Countries API'
+        title: 'Details Page | Rest Countries API'
     }
 ];

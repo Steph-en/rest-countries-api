@@ -7,7 +7,7 @@ Run `npm install`
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files. This uses the project's local Angular CLI, so a global `ng` install is not required.
 
 ## Code scaffolding
 
