@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HomeComponent } from "./pages/home/home.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMoon } from '@fortawesome/free-solid-svg-icons'
 
@@ -9,7 +8,7 @@ import { faMoon } from '@fortawesome/free-solid-svg-icons'
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [ RouterModule, HomeComponent, FontAwesomeModule]
+    imports: [ RouterModule, FontAwesomeModule]
 })
 
 export class AppComponent implements OnInit{
