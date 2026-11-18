@@ -1,20 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { RouterModule, ActivatedRoute  } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  let activatedRoute: jasmine.SpyObj<ActivatedRoute>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, RouterModule],
+      imports: [AppComponent],
       declarations: [],
-      providers: [{
-        provide: ActivatedRoute, useValue: activatedRoute
-      }]
+      providers: [provideRouter([])]
     }).compileComponents();
   });
 

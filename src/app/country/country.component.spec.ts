@@ -2,12 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Interface } from '../interface/interface';
 import { CountryComponent } from './country.component';
-import { ActivatedRoute } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 describe('CountryComponent', () => {
   let component: CountryComponent;
   let fixture: ComponentFixture<CountryComponent>;
-  let activatedRoute: jasmine.SpyObj<ActivatedRoute>
 
   const mockCountry: Interface = {
     names: {
@@ -38,9 +37,7 @@ describe('CountryComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CountryComponent,CommonModule],
-      providers: [{
-        provide: ActivatedRoute, useValue: activatedRoute
-      }]
+      providers: [provideRouter([])]
     }).compileComponents();
   });
 

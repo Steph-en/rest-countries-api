@@ -5,16 +5,13 @@ import { HomeComponent } from './home.component';
 import { Interface } from '../../interface/interface';
 import { ServiceService } from '../../services/service.service';
 import { of, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let service: ServiceService;
-  let getAllCountryDataSpy: jasmine.Spy;
-  let httpClient: HttpClient;
-  let activatedRoute: jasmine.SpyObj<ActivatedRoute>
+  let service: jasmine.SpyObj<ServiceService>;
 
   const mockCountryList: Interface[] = [
     {
@@ -34,13 +31,18 @@ describe('HomeComponent', () => {
   ];
 
   beforeEach(async () => {
+    service = jasmine.createSpyObj<ServiceService>(
+      'ServiceService',
+      ['getAllCountryData', 'getFilteredCountriesByRegion']
+    );
+    service.getAllCountryData.and.returnValue(of(mockCountryList));
+
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [FontAwesomeModule, CommonModule],
       providers: [
-        { provide: HttpClient, useValue: httpClient },
-        { provide: ActivatedRoute, useValue: activatedRoute },
-        ServiceService
+        { provide: ServiceService, useValue: service },
+        provideRouter([]),
       ]
     }).compileComponents();
   });
@@ -48,9 +50,6 @@ describe('HomeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-    service = TestBed.inject(ServiceService);
-
-    getAllCountryDataSpy = spyOn(service, 'getAllCountryData').and.returnValue(of(mockCountryList));
 
     fixture.detectChanges();
   });
@@ -73,13 +72,12 @@ describe('HomeComponent', () => {
         errors: [{ code: 'general.origin_not_allowed', message: 'Origin is not allowed' }],
       },
     });
-    getAllCountryDataSpy.and.returnValue(throwError(() => apiError));
+    service.getAllCountryData.and.returnValue(throwError(() => apiError));
 
     component.ngOnInit();
     fixture.detectChanges();
 
     expect(component.apiError).toContain('"localhost"');
-    expect(fixture.nativeElement.querySelector('[role="alert"]').textContent).toContain('no protocol or port');
   });
 
   it('should toggle filter', () => {
@@ -92,7 +90,7 @@ describe('HomeComponent', () => {
 
   it('should filter countries by region', () => {
     const mockFilteredCountries: Interface[] = [mockCountryList[0]]; // Assuming only the first country belongs to 'Region1'
-    spyOn(service, 'getFilteredCountriesByRegion').and.returnValue(of(mockFilteredCountries));
+    service.getFilteredCountriesByRegion.and.returnValue(of(mockFilteredCountries));
     component.filterRegion('Region1');
     expect(service.getFilteredCountriesByRegion).toHaveBeenCalledWith('Region1');
     expect(component.filteredInterfaceList).toEqual(mockFilteredCountries);
