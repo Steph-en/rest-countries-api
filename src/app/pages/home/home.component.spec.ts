@@ -4,45 +4,32 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { Interface } from '../../interface/interface';
 import { ServiceService } from '../../services/service.service';
-import { of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { of, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let service: ServiceService;
+  let getAllCountryDataSpy: jasmine.Spy;
   let httpClient: HttpClient;
   let activatedRoute: jasmine.SpyObj<ActivatedRoute>
 
   const mockCountryList: Interface[] = [
     {
-      name: {
-        common: 'Country1', official: 'Official Country1',
-        nativeName: {}
-      }, region: 'Region1', population: 1000000, capital: 'Capital1', borders: [], flags: {
-        svg: 'flag.svg',
-        png: '',
-        alt: ''
-      }, cca3: 'C1',
-      subregion: '',
-      tld: '',
-      languages: {},
-      currencies: {}
+      names: { alternates: [], common: 'Country1', official: 'Official Country1', native: {}, translations: {} },
+      codes: { alpha_2: 'C1', alpha_3: 'C1' },
+      region: 'Region1',
+      population: 1000000,
+      borders: [],
     },
     {
-      name: {
-        common: 'Country2', official: 'Official Country2',
-        nativeName: {}
-      }, region: 'Region2', population: 2000000, capital: 'Capital2', borders: [], flags: {
-        svg: 'flag.svg',
-        png: '',
-        alt: ''
-      }, cca3: 'C2',
-      subregion: '',
-      tld: '',
-      languages: {},
-      currencies: {}
+      names: { alternates: [], common: 'Country2', official: 'Official Country2', native: {}, translations: {} },
+      codes: { alpha_2: 'C2', alpha_3: 'C2' },
+      region: 'Region2',
+      population: 2000000,
+      borders: [],
     },
   ];
 
@@ -63,7 +50,7 @@ describe('HomeComponent', () => {
     component = fixture.componentInstance;
     service = TestBed.inject(ServiceService);
 
-    spyOn(service, 'getAllCountryData').and.returnValue(of(mockCountryList));
+    getAllCountryDataSpy = spyOn(service, 'getAllCountryData').and.returnValue(of(mockCountryList));
 
     fixture.detectChanges();
   });
@@ -77,6 +64,22 @@ describe('HomeComponent', () => {
     expect(component.interfaceList.length).toEqual(mockCountryList.length);
     expect(component.filteredInterfaceList.length).toEqual(mockCountryList.length);
     expect(component.regions).toEqual(['Region1', 'Region2']);
+  });
+
+  it('explains how to fix an API-key origin rejection', () => {
+    const apiError = new HttpErrorResponse({
+      status: 403,
+      error: {
+        errors: [{ code: 'general.origin_not_allowed', message: 'Origin is not allowed' }],
+      },
+    });
+    getAllCountryDataSpy.and.returnValue(throwError(() => apiError));
+
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(component.apiError).toContain('"localhost"');
+    expect(fixture.nativeElement.querySelector('[role="alert"]').textContent).toContain('no protocol or port');
   });
 
   it('should toggle filter', () => {
@@ -100,6 +103,6 @@ describe('HomeComponent', () => {
       component.interfaceList = mockCountryList; // Initialize interfaceList
       component.filterCountries({ target: { value: searchText } } as any); // Simulate event with search text
       expect(component.filteredInterfaceList.length).toEqual(1); // Only 'Country1' should match the search
-      expect(component.filteredInterfaceList[0].name.common.toLowerCase()).toContain(searchText);
+      expect(component.filteredInterfaceList[0].names.common.toLowerCase()).toContain(searchText);
   });
 });

@@ -10,21 +10,29 @@ describe('CountryComponent', () => {
   let activatedRoute: jasmine.SpyObj<ActivatedRoute>
 
   const mockCountry: Interface = {
-    name: {
+    names: {
+      alternates: [],
       common: 'Country', 
       official: 'Official Country',
-      nativeName: {}
+      native: {},
+      translations: {}
     },
-    capital: 'Capital',
+    codes: { alpha_2: 'C1', alpha_3: 'C1' },
+    capitals: [{
+      attributes: {
+        administrative: false,
+        constitutional: false,
+        executive: false,
+        judicial: false,
+        legislative: false,
+        primary: true
+      },
+      coordinates: { lat: 0, lng: 0 },
+      name: 'Capital'
+    }],
     population: 1000000,
     region: 'Region',
-    subregion: 'Subregion',
-    tld: '.c1',
-    languages: { eng: { name: 'English', nativeName: 'English' } },
-    currencies: { curr1: { name: 'Currency1', symbol: '$' } },
-    borders: ['Border1', 'Border2'],
-    flags: { png: 'flag.png', svg: 'flag.svg', alt: 'Flag of Country1' },
-    cca3: 'C1',
+    borders: [],
   };
 
   beforeEach(async () => {
@@ -49,8 +57,8 @@ describe('CountryComponent', () => {
 
   it('should render country details', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.country')?.textContent).toContain(mockCountry.name.common);
-    expect(compiled.querySelector('.capital')?.textContent).toContain('Capital: '+ mockCountry.capital);
+    expect(compiled.querySelector('.country')?.textContent).toContain(mockCountry.names.common);
+    expect(compiled.querySelector('.capital')?.textContent).toContain('Capital: ' + mockCountry.capitals?.[0].name);
     expect(compiled.querySelector('.population')?.textContent).toContain('Population: ' + mockCountry.population);
     expect(compiled.querySelector('.region')?.textContent).toContain('Region: ' + mockCountry.region);
   });

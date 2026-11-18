@@ -14,49 +14,49 @@ describe('DetailsComponent', () => {
   let service: ServiceService;
 
   const mockCountry: Interface = {
-    name: {
+    names: {
+      alternates: [],
       common: 'Country1',
       official: 'Official Country1',
-      nativeName: {
+      native: {
         eng: {
           official: 'Official Country1 Native',
           common: 'Country1 Native'
         }
-      }
+      },
+      translations: {}
     },
-    cca3: 'C1',
+    codes: { alpha_2: 'C1', alpha_3: 'C1' },
     region: 'Region1',
     subregion: 'Subregion1',
     population: 1000000,
-    capital: 'Capital1',
-    flags: { png: 'https://flag.url', svg: 'https://flag.url', alt: 'Flag of Country1' },
+    capitals: [],
     borders: ['C2'],
-    tld: '.c1',
-    languages: { eng: { name: 'English', nativeName: 'English' } },
-    currencies: { curr1: { name: 'Currency1', symbol: '$' } },
+    languages: [{ bcp47: 'en', iso639_1: 'en', iso639_2b: 'eng', iso639_2t: 'eng', iso639_3: 'eng', name: 'English', native_name: 'English' }],
+    currencies: [{ code: 'CUR1', name: 'Currency1', symbol: '$' }],
   };
 
   const mockBorderCountry: Interface = {
-    name: {
+    names: {
+      alternates: [],
       common: 'Country2',
       official: 'Official Country2',
-      nativeName: {
+      native: {
         eng: {
           official: 'Official Country2 Native',
           common: 'Country2 Native'
         }
-      }
+      },
+      translations: {}
     },
-    cca3: 'C2',
+    codes: { alpha_2: 'C2', alpha_3: 'C2' },
     region: 'Region2',
     subregion: 'Subregion2',
     population: 2000000,
-    capital: 'Capital2',
-    flags: { png: 'https://flag2.url', svg: 'https://flag2.url', alt: 'Flag of Country2' },
+    capitals: [],
     borders: [],
-    tld: '.c2',
-    languages: { eng: { name: 'English', nativeName: 'English' } },
-    currencies: { curr2: { name: 'Currency2', symbol: '€' } },
+    languages: [{ bcp47: 'en', iso639_1: 'en', iso639_2b: 'eng', iso639_2t: 'eng', iso639_3: 'eng', name: 'English', native_name: 'English' }],
+    currencies: [{ code: 'CUR2', name: 'Currency2', symbol: '€' }],
   };
 
   beforeEach(async () => {
@@ -103,17 +103,17 @@ describe('DetailsComponent', () => {
   });
 
   it('should return native name correctly', () => {
-    const nativeName = component.getNativeName(mockCountry.name.nativeName);
+    const nativeName = component.getNativeName(mockCountry.names.native);
     expect(nativeName).toBe('Country1 Native');
   });
 
   it('should return currencies correctly', () => {
-    const currencies = component.getCurrencies(mockCountry.currencies);
+    const currencies = component.getCurrencies(mockCountry.currencies ?? []);
     expect(currencies).toBe('Currency1');
   });
 
   it('should return languages correctly', () => {
-    const languages = component.getLanguages(mockCountry.languages);
-    expect(languages).toEqual([{name: 'English', nativeName: 'English'}]);
+    const languages = component.getLanguages(mockCountry.languages ?? []);
+    expect(languages).toBe('English');
   });
 });

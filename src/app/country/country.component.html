@@ -1,14 +1,14 @@
-<a [routerLink]="['/details', interfaceForm.name.common]">
+<a [routerLink]="['/details', interfaceForm.names.common]">
     <div class="cards">
         <div class="country-card">
             <figure>
-                <img class="flag" [style.background-image]="'url(' + interfaceForm.flags.svg + ')'" alt="Flag of {{interfaceForm.name.common}}">
+                <img class="flag" [style.background-image]="'url(' + interfaceForm.flag?.url_svg + ')'" alt="Flag of {{interfaceForm.names.common}}">
             </figure>
             <div class="info">
-                <h2 class="country">{{ interfaceForm.name.common }}</h2>
+                <h2 class="country">{{ interfaceForm.names.common }}</h2>
                 <p class="population">Population: {{ interfaceForm.population }}</p>
                 <p class="region">Region: {{ interfaceForm.region }}</p>
-                <p class="capital">Capital: {{ interfaceForm.capital }}</p>
+                <p class="capital">Capital: {{ interfaceForm.capitals?.[0]?.name ?? 'N/A' }}</p>
             </div>
         </div>
     </div>

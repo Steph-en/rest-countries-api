@@ -16,6 +16,8 @@
     </form>       
 </section>
 
+<p *ngIf="apiError" class="api-error" role="alert">{{ apiError }}</p>
+
 <div class="country-section">
      <app-country *ngFor="let interfaceForm of filteredInterfaceList" [interfaceForm]="interfaceForm"></app-country>
 </div>

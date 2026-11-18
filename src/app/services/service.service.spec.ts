@@ -1,214 +1,117 @@
-import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { CountryApiResponse, Interface } from '../interface/interface';
 import { ServiceService } from './service.service';
-import { Interface } from '../interface/interface';
 
-const countries: Interface[] = [
-  {
-    name: {
-      common: 'Country1',
-      nativeName: {},
-      official: ''
-    }, cca3: 'AAA',
-    region: 'Region1',
-    capital: '',
-    population: 0,
-    subregion: '',
-    tld: '',
-    languages: {},
-    currencies: {},
-    borders: [],
-    flags: {
-      png: '',
-      svg: '',
-      alt: ''
-    }
-  },
-  {
-    name: {
-      common: 'Country2',
-      nativeName: {},
-      official: ''
-    }, cca3: 'BBB',
-    region: 'Region2',
-    capital: '',
-    population: 0,
-    subregion: '',
-    tld: '',
-    languages: {},
-    currencies: {},
-    borders: [],
-    flags: {
-      png: '',
-      svg: '',
-      alt: ''
-    }
-  },
-  {
-    name: {
-      common: 'Country3',
-      nativeName: {},
-      official: ''
-    }, cca3: '',
-    region: 'Region1',
-    capital: '',
-    population: 0,
-    subregion: '',
-    tld: '',
-    languages: {},
-    currencies: {},
-    borders: [],
-    flags: {
-      png: '',
-      svg: '',
-      alt: ''
+function makeCountry(common: string, alpha3: string, region: string): Interface {
+  return {
+    names: {
+      alternates: [],
+      common,
+      native: {},
+      official: common,
+      translations: {},
     },
-  }
-];
-
+    codes: { alpha_2: alpha3.slice(0, 2), alpha_3: alpha3 },
+    region,
+    population: 0,
+    borders: [],
+  };
+}
 
 describe('ServiceService', () => {
   let service: ServiceService;
   let httpMock: HttpTestingController;
 
+  const countries = [
+    makeCountry('Country1', 'AAA', 'Region1'),
+    makeCountry('Country2', 'BBB', 'Region2'),
+    makeCountry('Country3', 'CCC', 'Region1'),
+  ];
+
+  function makeResponse(objects: Interface[], offset: number, total: number): CountryApiResponse {
+    return {
+      data: {
+        objects,
+        meta: {
+          total,
+          count: objects.length,
+          limit: 100,
+          offset,
+          more: offset + objects.length < total,
+          request_id: 'test-request',
+          duration: 1,
+        },
+      },
+    };
+  }
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ServiceService]
+      providers: [ServiceService],
     });
     service = TestBed.inject(ServiceService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
+  afterEach(() => httpMock.verify());
 
-  it('should return all country data', () => {
-    service.getAllCountryData().subscribe((countries) => {
-      expect(countries.length).toBe(2);
-      expect(countries[0].name.common).toBe('Country 1');
-      expect(countries[0].cca3).toBe('C1');
-      expect(countries[0].region).toBe('Region 1');
-      expect(countries[1].name.common).toBe('Country 2');
-      expect(countries[1].cca3).toBe('C2');
-      expect(countries[1].region).toBe('Region 2');
+  it('uses bearer authentication and unwraps the API response', () => {
+    service.getAllCountryData().subscribe((result) => {
+      expect(result).toEqual(countries);
+      expect(result[0].names.common).toBe('Country1');
+      expect(result[0].codes.alpha_3).toBe('AAA');
     });
 
-    const req = httpMock.expectOne('https://restcountries.com/v3.1/all');
-    expect(req.request.method).toBe('GET');
-    req.flush([{ name: { common: 'Country 1' }, cca3: 'C1', region: 'Region 1' }, { name: { common: 'Country 2' }, cca3: 'C2', region: 'Region 2' }]);
+    const request = httpMock.expectOne((req) => req.url === service['countryAPI']);
+    expect(request.request.method).toBe('GET');
+    expect(request.request.headers.get('Authorization')).toMatch(/^Bearer \S+$/);
+    expect(request.request.params.get('limit')).toBe('100');
+    expect(request.request.params.get('offset')).toBe('0');
+    request.flush(makeResponse(countries, 0, countries.length));
   });
 
-  it('should return the country with the given name', () => {
+  it('loads all pages before returning country data', () => {
+    const results: Interface[][] = [];
+    service.getAllCountryData().subscribe((result) => results.push(result));
+
+    httpMock.expectOne((req) => req.url === service['countryAPI']).flush(
+      makeResponse(countries.slice(0, 2), 0, countries.length)
+    );
+    httpMock.expectOne((req) =>
+      req.url === service['countryAPI'] && req.params.get('offset') === '2'
+    ).flush(makeResponse(countries.slice(2), 2, countries.length));
+
+    expect(results).toEqual([countries]);
+  });
+
+  it('returns a country by common name and alpha-3 code', () => {
     service['allCountries'] = countries;
 
-    const result = service.getCountryByName('Country1');
-    result.subscribe((data) => {
-      expect(data.length).toBe(1);
-      expect(data[0].name.common).toBe('Country1');
+    service.getCountryByName('Country1').subscribe((result) => {
+      expect(result).toEqual([countries[0]]);
+    });
+    service.getCountryByCode('BBB').subscribe((result) => {
+      expect(result).toEqual([countries[1]]);
     });
   });
 
-  it('should return the country with the given code', () => {
-    const code = 'AAA';
-    service['allCountries'] = countries
+  it('filters countries by region without case sensitivity', () => {
+    service['allCountries'] = countries;
 
-    const mockCountriesData = [
-      {
-        name: {
-          common: 'Country1',
-          nativeName: {},
-          official: ''
-        }, cca3: 'AAA', region: 'Region1',
-        capital: '',
-        population: 0,
-        subregion: '',
-        tld: '',
-        languages: {},
-        currencies: {},
-        borders: [],
-        flags: {
-          png: '',
-          svg: '',
-          alt: ''
-        }
-      }
-    ]
-
-    const countriesByCode = service.getCountryByCode(code)
-    countriesByCode.subscribe((countries) => {
-      expect(countries).toEqual(mockCountriesData);
+    service.getFilteredCountriesByRegion('region1').subscribe((result) => {
+      expect(result).toEqual([countries[0], countries[2]]);
     });
   });
 
-  it('should return filtered countries by region', () => {
-    service['allCountries'] = countries
-    const mockFilteredCountries: Interface[] = [
-      {
-        name: {
-          common: 'Country1',
-          nativeName: {},
-          official: ''
-        }, cca3: 'AAA',
-        region: 'Region1',
-        capital: '',
-        population: 0,
-        subregion: '',
-        tld: '',
-        languages: {},
-        currencies: {},
-        borders: [],
-        flags: {
-          png: '',
-          svg: '',
-          alt: ''
-        }
-      },
-      {
-        name: {
-          common: 'Country3',
-          nativeName: {},
-          official: ''
-        }, region: 'Region1',
-        capital: '',
-        population: 0,
-        subregion: '',
-        tld: '',
-        languages: {},
-        currencies: {},
-        borders: [],
-        flags: {
-          png: '',
-          svg: '',
-          alt: ''
-        },
-        cca3: ''
-      }
-    ];
-    let filteredCountries: Interface[];
-
-
-    service.getFilteredCountriesByRegion('Region1').subscribe((countries) => {
-      filteredCountries = countries;
-      expect(filteredCountries).toEqual(mockFilteredCountries);
-    });
-  });
-
-  it('should return an empty array when getAllCountryData is called and there are no countries data available', () => {
-    const expectedData: Interface[] = [];
-
-    service.getAllCountryData().subscribe((data) => {
-      expect(data).toEqual(expectedData);
+  it('loads country data when a details route requests a country first', () => {
+    service.getCountryByName('country1').subscribe((result) => {
+      expect(result).toEqual([countries[0]]);
     });
 
-    const req = httpMock.expectOne('https://restcountries.com/v3.1/all');
-    req.flush([]);
-  });
-
-  it('should return an empty array when the name parameter is empty', () => {
-    const service: ServiceService = TestBed.inject(ServiceService);
-    const name = '';
-
-    service.getCountryByName(name).subscribe((result) => {
-      expect(result).toEqual([]);
-    });
+    httpMock.expectOne((req) => req.url === service['countryAPI']).flush(
+      makeResponse(countries, 0, countries.length)
+    );
   });
 });
