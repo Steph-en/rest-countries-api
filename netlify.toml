@@ -1,3 +1,7 @@
+[build]
+  command = "ng build"
+  publish = "dist/rest-countries-api/browser"
+
 [[redirects]]
   from = "/*"
   to = "/"

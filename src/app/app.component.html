@@ -1,11 +1,10 @@
 <main>
-    <head class="head">
-        <a [routerLink] = "['/']">Where in the world?</a>
-
-        <button (click)="toggle()"><fa-icon [icon]="moon"></fa-icon> Dark Mode</button>
-    </head>
+    <header class="head">
+        <a [routerLink]="['/']">Where in the world?</a>
+        <button (click)="toggle()"><fa-icon [icon]="moon"></fa-icon>Dark Mode</button>
+    </header>
 
     <section class="content">
-        <router-outlet />
+        <router-outlet></router-outlet>
     </section>
 </main>

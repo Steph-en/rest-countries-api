@@ -103,7 +103,7 @@
     width: inherit;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 50px;
 }
 
 @media screen and (max-width: 768px) {

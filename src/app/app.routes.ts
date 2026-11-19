@@ -5,17 +5,21 @@ import { DetailsComponent } from './pages/details/details.component';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: '/home',
-        pathMatch: 'full',
+        component: HomeComponent,
+        title: 'Home Page | Rest Countries API'
     },
     {
         path: 'home',
-        loadComponent: () => import("./pages/home/home.component").then((c) => c.HomeComponent),
-        title: 'Home Page | Rest Countries API'
+        redirectTo: '',
+        pathMatch: 'full'
     },
     {
         path: 'details/:name',
         component: DetailsComponent,
         title: 'Details Page | Rest Countries API'
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 ];
