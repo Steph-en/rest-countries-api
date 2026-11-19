@@ -1,4 +1,3 @@
-
 .search {
     margin: 3% 0;
     display: flex;
@@ -98,6 +97,39 @@
         }
     }
 }
+
+
+.loading-state,
+.error-state,
+.empty-state {
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--font);
+}
+
+.loading-state p {
+    font-size: 16px;
+}
+
+.error-state button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--font);
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 10px 0.1px var(--shadow);
+}
+
+.empty-state p {
+    font-size: 16px;
+}
+
 
 .country-section {
     width: inherit;

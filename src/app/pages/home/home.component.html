@@ -1,21 +1,54 @@
+
 <section class="search">
-    <form>
+    <form (submit)="$event.preventDefault()">
         <div class="search-box">
             <fa-icon class="search-icon" [icon]="search"></fa-icon>
 
-            <input class="input" type="text" placeholder="Search for a country…" (input)="filterCountries($event)" />
+            <input
+                class="input"
+                type="search"
+                placeholder="Search for a country..."
+                [value]="searchText"
+                (input)="filterCountries($event)"
+            />
         </div>
-        
-        <div class="filter-button" (click)="toggle()">Filter by Region
+
+        <div class="filter-button" (click)="toggle()">
+            Filter by Region
             <fa-icon class="arrow-icon" [icon]="arrow"></fa-icon>
         </div>
 
         <div class="drop-down" *ngIf="showFilter">
-            <li *ngFor="let region of regions" (click)="filterRegion(region)">{{ region }}</li>
+            <li (click)="filterRegion(null)">All Regions</li>
+
+            <li *ngFor="let region of regions" (click)="filterRegion(region)">
+                {{ region }}
+            </li>
         </div>
-    </form>       
+    </form>
 </section>
 
-<div class="country-section">
-     <app-country *ngFor="let interfaceForm of filteredInterfaceList" [interfaceForm]="interfaceForm"></app-country>
+<!-- Loading state -->
+<div class="loading-state" *ngIf="isLoading">
+    <p>Loading countries...</p>
+</div>
+
+<!-- Error state -->
+<div class="error-state" *ngIf="!isLoading && loadError">
+    <p>{{ loadError }}</p>
+
+    <button type="button" (click)="loadCountries()">
+        Try Again
+    </button>
+</div>
+
+<!-- Countries -->
+<div class="country-section" *ngIf="!isLoading && !loadError && filteredInterfaceList.length > 0">
+    <app-country *ngFor="let interfaceForm of filteredInterfaceList" [interfaceForm]="interfaceForm">
+    </app-country>
+</div>
+
+<!-- Empty search results -->
+<div class="empty-state" *ngIf="!isLoading && !loadError && filteredInterfaceList.length === 0">
+    <p>No countries found. Try another search or region.</p>
 </div>
